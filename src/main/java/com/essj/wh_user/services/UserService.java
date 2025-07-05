@@ -22,10 +22,38 @@ public class UserService {
 
     }
 
-    public UserDTO findById (Long id){
-        User result = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found!"));
-        return UserDTO.toDTO(result);
-
+    public UserDTO findById (Long id) {
+        Optional<User> result = userRepository.findById(id);
+        if (result.isPresent()){
+            return UserDTO.toDTO(result.get());
+        }
+        return null;
     }
 
+    public UserDTO save(UserDTO userDTO){
+        User user = userRepository.save(User.fromDTO(userDTO));
+        return UserDTO.toDTO(user);
+    }
+
+    public UserDTO delete(Long id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()){
+            userRepository.delete(user.get());
+        }
+        return null;
+    }
+
+    public UserDTO findByCpf(String cpf){
+        User user = userRepository.findByCpf(cpf);
+        if (user != null){
+            return UserDTO.toDTO(user);
+        }
+        return null;
+    }
+
+    public List<UserDTO> queryByName(String name){
+        List<User> users = userRepository.queryByNameLike(name);
+        return users.stream().map(UserDTO::toDTO).collect(Collectors.toList());
+
+    }
 }

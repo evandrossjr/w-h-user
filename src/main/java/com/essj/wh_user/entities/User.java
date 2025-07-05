@@ -1,14 +1,12 @@
 package com.essj.wh_user.entities;
 
 import com.essj.wh_user.dtos.UserDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id

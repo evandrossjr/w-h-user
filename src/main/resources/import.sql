@@ -1,0 +1,1 @@
+INSERT INTO users (nome, cpf, endereco, email, telefone, data_cadastro) values ('Evandro', '1243568', 'Lauro de Freitas','evandro@mail.com', '71991239999','2025-07-05')
