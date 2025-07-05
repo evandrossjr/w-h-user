@@ -51,8 +51,8 @@ public class UserService {
         return null;
     }
 
-    public List<UserDTO> queryByName(String name){
-        List<User> users = userRepository.queryByNameLike(name);
+    public List<UserDTO> queryByName(String nome){
+        List<User> users = userRepository.findByNomeContainingIgnoreCase(nome);
         return users.stream().map(UserDTO::toDTO).collect(Collectors.toList());
 
     }

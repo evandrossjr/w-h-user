@@ -3,9 +3,7 @@ package com.essj.wh_user.controllers;
 import com.essj.wh_user.dtos.UserDTO;
 import com.essj.wh_user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +21,23 @@ public class UserController {
     }
 
     @GetMapping("users/{id}")
-    public UserDTO findById(Long id){
+    public UserDTO findById(@PathVariable Long id){
         return userService.findById(id);
+    }
+
+    @GetMapping("users/cpf/{cpf}")
+    public UserDTO findByCpf(@PathVariable String cpf){
+        return userService.findByCpf(cpf);
+    }
+
+    @DeleteMapping("users/{id}")
+    public UserDTO delete(@PathVariable Long id){
+        return userService.delete(id);
+    }
+
+    @GetMapping("users/search")
+    public List<UserDTO> queryByName(@RequestParam (name="nome", required = true) String nome){
+        return userService.queryByName(nome);
     }
 
 }
