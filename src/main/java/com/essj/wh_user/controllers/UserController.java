@@ -25,6 +25,7 @@ public class UserController {
         return userService.findById(id);
     }
 
+
     @GetMapping("users/cpf/{cpf}")
     public UserDTO findByCpf(@PathVariable String cpf){
         return userService.findByCpf(cpf);
@@ -33,6 +34,11 @@ public class UserController {
     @DeleteMapping("users/{id}")
     public UserDTO delete(@PathVariable Long id){
         return userService.delete(id);
+    }
+
+    @PostMapping("/users")
+    public UserDTO newUser(@RequestBody UserDTO userDTO){
+        return userService.save(userDTO);
     }
 
     @GetMapping("users/search")
